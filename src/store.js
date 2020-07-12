@@ -1,16 +1,19 @@
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 
-const initialState = [];
+import fullScreenProgress, {
+  circuralsProgress,
+} from "./state/fullScreenProgress";
 
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    default:
-      return state;
-  }
-};
+window.addCircural = () => store.dispatch(circuralsProgress.add());
+window.removeCircural = () => store.dispatch(circuralsProgress.remove());
 
-const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
+const reducers = combineReducers({ fullScreenProgress });
+
+const store = createStore(
+  reducers,
+  composeWithDevTools(applyMiddleware(thunk))
+);
 
 export default store;

@@ -1,10 +1,10 @@
 import React from "react";
-import { Button } from "@material-ui/core";
+import FullScreenProgress from "./components/FullScreenProgress";
 
 const App = () => {
   return (
     <div>
-      <Button color="primary">Button</Button>
+      <FullScreenProgress />
     </div>
   );
 };
