@@ -2,17 +2,15 @@ import { createStore, applyMiddleware, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 
-import fullScreenProgress, {
-  circuralsProgress,
-} from "./state/fullScreenProgress";
+import fullScreenProgress from "./state/fullScreenProgress";
+import snackbars from "./state/snackbars";
+import drawer from "./state/drawer";
 
-import snackbars, { addSnackbar } from "./state/snackbars";
+// window.addCircural = () => store.dispatch(circuralsProgress.add());
+// window.removeCircural = () => store.dispatch(circuralsProgress.remove());
+// window.addSnack = (text, color) => store.dispatch(addSnackbar(text, color));
 
-window.addCircural = () => store.dispatch(circuralsProgress.add());
-window.removeCircural = () => store.dispatch(circuralsProgress.remove());
-window.addSnack = (text, color) => store.dispatch(addSnackbar(text, color));
-
-const reducers = combineReducers({ fullScreenProgress, snackbars });
+const reducers = combineReducers({ fullScreenProgress, snackbars, drawer });
 
 const store = createStore(
   reducers,
