@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { getRecipesAsyncAction } from "../state/recipes";
 
-const UserRecipes = () => {
+const UserRecipes = (props) => {
+  useEffect(() => {
+    props.getRecipes();
+  }, [props]);
   return <div>Moje przepisy</div>;
 };
 
-export default UserRecipes;
+const mapStateToProps = (state) => ({
+  recipes: state,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getRecipes: () => dispatch(getRecipesAsyncAction()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserRecipes);

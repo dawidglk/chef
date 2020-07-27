@@ -5,12 +5,18 @@ import thunk from "redux-thunk";
 import fullScreenProgress from "./state/fullScreenProgress";
 import snackbars from "./state/snackbars";
 import drawer from "./state/drawer";
+import recipes from "./state/recipes";
 
 // window.addCircural = () => store.dispatch(circuralsProgress.add());
 // window.removeCircural = () => store.dispatch(circuralsProgress.remove());
 // window.addSnack = (text, color) => store.dispatch(addSnackbar(text, color));
 
-const reducers = combineReducers({ fullScreenProgress, snackbars, drawer });
+const reducers = combineReducers({
+  fullScreenProgress,
+  snackbars,
+  drawer,
+  recipes,
+});
 
 const store = createStore(
   reducers,
