@@ -6,6 +6,7 @@ import mapObjectToArray from "../utilities/mapObjectToArray";
 
 const SAVE_RECIPES = "recipes/SAVE_RECIPES";
 const ERROR = "recipes/ERROR";
+const DELETE_RECIPES = "recipes/DELETE_RECIPES";
 
 export const addRecipesAsyncAction = (form) => (dispatch, getState) => {
   dispatch(circuralsProgress.add());
@@ -42,6 +43,28 @@ export const getRecipesAsyncAction = () => (dispatch, getState) => {
     });
 };
 
+const deleteRecipes = (key) => ({ type: DELETE_RECIPES, key });
+
+export const deleteRecipeAsyncAction = (key, succes, error) => (
+  dispatch,
+  getState
+) => {
+  dispatch(circuralsProgress.add());
+  axios
+    .delete(`${URL}recipes/${key}.json`)
+    .then(() => {
+      dispatch(deleteRecipes(key));
+      dispatch(circuralsProgress.remove());
+      dispatch(addSnackbar("PRZEPIS Usunieto"));
+      succes();
+    })
+    .catch(() => {
+      dispatch(circuralsProgress.remove());
+      dispatch(addSnackbar("Usuwanie nie powiodlo sie", "red"));
+      error();
+    });
+};
+
 const initialState = {
   recipes: [],
   isError: false,
@@ -59,6 +82,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isError: true,
+      };
+    case DELETE_RECIPES:
+      return {
+        ...state,
+        recipes: state.recipes.filter((recipe) => recipe.key !== action.key),
       };
     default:
       return state;

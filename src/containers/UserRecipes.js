@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { getRecipesAsyncAction } from "../state/recipes";
+import {
+  getRecipesAsyncAction,
+  deleteRecipeAsyncAction,
+} from "../state/recipes";
 
 import { Typography } from "@material-ui/core";
 import RecipesList from "../components/RecipesList/RecipesList";
@@ -22,7 +25,7 @@ const UserRecipes = (props) => {
     props.getRecipes();
   };
 
-  console.log(props);
+  console.log(props, "PRORORORO");
 
   if (props.isError) {
     return (
@@ -51,6 +54,7 @@ const UserRecipes = (props) => {
         data={recipe}
         param={props.match.params.id}
         back={() => props.history.push("/your-recipes")}
+        deleteRecipe={props.deleteRecipe}
       />
     );
   }
@@ -73,6 +77,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   getRecipes: () => dispatch(getRecipesAsyncAction()),
+  deleteRecipe: (key, succes, error) =>
+    dispatch(deleteRecipeAsyncAction(key, succes, error)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserRecipes);

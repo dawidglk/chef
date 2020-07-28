@@ -42,7 +42,13 @@ const RecipesListItem = ({ recipe, changeRoute, route }) => {
   return (
     <div
       style={styles.container}
-      onClick={() => changeRoute(`${route}/${recipe.key}`)}
+      onClick={() => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+        changeRoute(`${route}/${recipe.key}`);
+      }}
     >
       <img
         style={styles.img}
