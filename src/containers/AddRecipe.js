@@ -29,7 +29,7 @@ const MAX_DESCRIPTION_LENGTH = 1500;
 const MAX_TIME = 240;
 
 const AddRecipe = (props) => {
-  console.log(props);
+
   const formInStorage = JSON.parse(localStorage.getItem("form")) || {};
 
   React.useEffect(() => {
