@@ -20,7 +20,7 @@ const App = () => {
         <Route path="/" exact component={DashBoard} />
         <Route path="/add-recipe" component={AddRecipe} />
         <Route path="/recipes" component={Recipes} />
-        <Route path="/your-recipes" component={UserRecipes} />
+        <Route path="/your-recipes/:id?" component={UserRecipes} />
         <Route path="/change-password" component={ChangePassword} />
       </BrowserRouter>
       <FullScreenProgress />
